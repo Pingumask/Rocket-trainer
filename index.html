@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Rocket Trainer</title>
+		<link
+			rel="stylesheet"
+			href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
+		/>
+		<style>
+			body {
+				background-color: #333333;
+				background-image: url('./map.png');
+				background-size: contain;
+				background-repeat: no-repeat;
+				background-position: center;
+				min-height: 100vh;
+                padding:0;
+                margin:0;
+                box-sizing:border-box;
+
+			}
+			.ui-widget-content {
+				cursor: move;
+                display:flex;
+                justify-content:center;
+                align-items:center;
+                color:white;
+                font-weight:bold;
+                position:absolute;
+			}
+            .car{
+                width: 7vh;
+				height: 3.5vh;                
+            }
+			.blue {
+				background: blue;
+                border-radius:0 50% 50% 0;
+			}
+			.orange {
+				background: orange;
+                border-radius: 50% 0 0 50%;
+			}
+            .ball{
+                background: #cccccc;
+                border:1px solid black;
+                border-radius:50%;
+                width: 4vh;
+				height: 4vh;
+                position:absolute;
+                top:47.2vh;
+                left:48.7vw;
+            }
+            #BA{
+                top:25vh;
+                left:34vw;
+                transform:rotate(45deg);
+            }
+            #BB{
+                top:47.3vh;
+                left:25vw;
+            }
+            #BC{
+                top:70vh;
+                left:34vw;
+                transform:rotate(-45deg);
+            }
+            #OA{
+                top:25vh;
+                left:62vw;
+                transform:rotate(-45deg);
+            }
+            #OB{
+                top:47.3vh;
+                left:71vw;
+            }
+            #OC{
+                top:70vh;
+                left:62vw;
+                transform:rotate(45deg);
+            }
+		</style>
+		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<script>
+			$(function () {
+				$('[draggable=true]').draggable();
+			});
+		</script>
+		<script defer>
+			document.addEventListener("keydown",event=>{
+                console.log(event.key);
+                let dragged = $('.ui-draggable-dragging')[0];
+                if(event.key=="ArrowRight"){
+                    dragged.setAttribute("rotate",Number(dragged.getAttribute("rotate"))+5);
+                }
+                else if(event.key=="ArrowLeft"){
+                    dragged.setAttribute("rotate",Number(dragged.getAttribute("rotate"))-5);
+                }
+                dragged.style.transform=`rotate(${dragged.getAttribute("rotate")}deg)`;
+            });            
+		</script>
+	</head>
+	<body>
+        <main>
+            <div draggable="true" id="BA" class="ui-widget-content blue car" rotate="45">A</div>
+            <div draggable="true" id="BB" class="ui-widget-content blue car" rotate="0">B</div>
+            <div draggable="true" id="BC" class="ui-widget-content blue car" rotate="-45">C</div>
+            <div draggable="true" class="ui-widget-content ball" rotate="0">O</div>
+            <div draggable="true" id="OA" class="ui-widget-content orange car" rotate="-45">A</div>
+            <div draggable="true" id="OB" class="ui-widget-content orange car" rotate="0">B</div>
+            <div draggable="true" id="OC" class="ui-widget-content orange car" rotate="45">C</div>
+        </main>
+	</body>
+</html>
